@@ -6,8 +6,11 @@
 }
 
 .input-container .some_class_name{
-    width: 25%;
-    height: 60px;
+    width: 28%;
+    height: 50px;
+    border: 1px solid;
+    position: absolute;
+    left: 390px;
 }
 
 textarea {
@@ -27,10 +30,10 @@ textarea {
   }
 
 .cont-wrapper{
-    width: 276px;
+    width: 306px;
     position: relative;
-    left: 408px;
-    top: 10px;
+    left: 390px;
+    top: 61px;
     height: 200px;
     overflow-y: scroll;
     border: 1px solid red;
@@ -67,4 +70,10 @@ textarea {
     bottom: 20px;
     display: block;
     bottom: 20px;
+}
+input:focus{
+    outline: none;
+}
+input{
+    border: none;
 }
