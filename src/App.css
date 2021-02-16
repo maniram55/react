@@ -7,10 +7,15 @@
 
 .input-container .some_class_name{
     width: 28%;
-    height: 50px;
+    height: 30px;
+    left: 395px;
+    position: relative;
     border: 1px solid;
-    position: absolute;
-    left: 390px;
+    overflow-y: auto;
+}
+
+.curser-pointer{
+    cursor: pointer;
 }
 
 textarea {
@@ -33,7 +38,7 @@ textarea {
     width: 306px;
     position: relative;
     left: 390px;
-    top: 61px;
+    top: 10px;
     height: 200px;
     overflow-y: scroll;
     border: 1px solid red;
@@ -71,9 +76,24 @@ textarea {
     display: block;
     bottom: 20px;
 }
+
 input:focus{
     outline: none;
 }
+
 input{
     border: none;
+}
+
+.all-member-list-cont{
+    text-align: center;
+    cursor: pointer;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid bisque;
+}
+
+.all-member-list-cont:hover{
+    background-color: rgb(97, 131, 245);
+    color: white;
 }

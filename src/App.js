@@ -1,6 +1,10 @@
 import './App.css';
 import TagList from './TagList';
 import React, { Component } from "react";
+import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { library} from '@fortawesome/fontawesome-svg-core';
+import { faTrash} from '@fortawesome/free-solid-svg-icons';
+library.add(faTrash);
 
 //move constant here
 const memberList = [
@@ -85,20 +89,45 @@ export default class App extends Component {
       items: memberList,
       selectedItems: []
       };
+      this.sortingMemberList();
     }
 
-    onParantSelectMember = (items,slectedMember) => {
+ onParantSelectMember = (items,slectedMember) => {
+      if(slectedMember){
       this.setState({
         selectedItems: this.state.selectedItems.concat(slectedMember),
         items: items
       })
+    this.toggleFocus()
+  } else {
+    this.setState({
+      selectedItems: items
+    })
+    this.renderSelectedMembers();
     this.toggleFocus();
+  }
   }
 
     toggleFocus = () => {
     const isTagFocused = !this.state.isTagFocused 
     this.setState({ isTagFocused });
     }
+
+    deleteItem = (currentItem) => {
+      const items = this.state.selectedItems.filter(item => item.value !== currentItem.value);
+      this.setState({
+        selectedItems: items,
+        items: this.state.items.concat(currentItem)
+      })
+    }
+
+      sortingMemberList = () => {
+        let sortedMembers = this.state.items.sort((a, b) => a.value - b.value);
+        this.setState({
+          items: sortedMembers
+        })
+      }
+    
 
     renderSelectedMembers = () => {
       const listItems = this.state.selectedItems.map((currentItem) => {
@@ -109,6 +138,7 @@ export default class App extends Component {
             <span className=""> 
             {currentItem.name}
            </span>
+           <span> <FontAwesomeIcon className="faicons curser-pointer" icon='trash' onClick={this.deleteItem.bind(this,currentItem)}/> </span>
             </div>
             </div>
             </div>
