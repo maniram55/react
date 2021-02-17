@@ -6,7 +6,7 @@ import { library} from '@fortawesome/fontawesome-svg-core';
 import { faTrash} from '@fortawesome/free-solid-svg-icons';
 library.add(faTrash);
 
-//move constant here
+//Constant value for taglist
 const memberList = [
   {
       "value": 1,
@@ -81,27 +81,30 @@ const memberList = [
       "email": "foo.aaa@foo.com"
   },
 ];
+
 export default class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      isTagFocused: false,
-      items: memberList,
-      selectedItems: []
+      isTagFocused: false, //Default hide tag list using flag
+      items: memberList,  //assign taglist into items
+      selectedItems: []   // Default not selected any items in input
       };
-      this.sortingMemberList();
     }
 
  onParantSelectMember = (items,slectedMember) => {
-      if(slectedMember){
+
+    if(slectedMember){ 
       this.setState({
         selectedItems: this.state.selectedItems.concat(slectedMember),
         items: items
       })
-    this.toggleFocus()
+    this.toggleFocus();
+
   } else {
     this.setState({
-      selectedItems: items
+      selectedItems: this.state.selectedItems.concat(items),
+      items : []
     })
     this.renderSelectedMembers();
     this.toggleFocus();
@@ -114,28 +117,27 @@ export default class App extends Component {
     }
 
     deleteItem = (currentItem) => {
-      const items = this.state.selectedItems.filter(item => item.value !== currentItem.value);
+      const filteredSelectedItems = this.state.selectedItems.filter(item => item.value !== currentItem.value);
       this.setState({
-        selectedItems: items,
-        items: this.state.items.concat(currentItem)
+        selectedItems: filteredSelectedItems,
+        items: this.sortingMemberList(this.state.items.concat(currentItem))
       })
+      
     }
 
-      sortingMemberList = () => {
-        let sortedMembers = this.state.items.sort((a, b) => a.value - b.value);
-        this.setState({
-          items: sortedMembers
-        })
+      sortingMemberList = (items) => {
+        let sortedMembers = items.sort((a, b) => a.value - b.value);
+        return sortedMembers;
       }
     
 
     renderSelectedMembers = () => {
       const listItems = this.state.selectedItems.map((currentItem) => {
-         return <div>
-         <div className="">
-         <div className="" >
+         return <div className="display-inline">
+         <div className="memberlist-con">
+         <div className="memberlist-item" >
              <img src={currentItem.avatar} alt= {currentItem.name}  width="15" height="15"></img>
-            <span className=""> 
+            <span className="item-content"> 
             {currentItem.name}
            </span>
            <span> <FontAwesomeIcon className="faicons curser-pointer" icon='trash' onClick={this.deleteItem.bind(this,currentItem)}/> </span>
@@ -150,17 +152,17 @@ export default class App extends Component {
 render(){
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>My Tagify Elements</h1>
-      </header>
+      <header className="App-header"> 
+        <h1>My Tagify Elements</h1>  
+      </header> 
 
-      <div className="input-container">
-      <div className='some_class_name' onFocus={this.toggleFocus} >
-      <input name='input' placeholder='Add Some Tags....'
+      <div> 
+      <div className='some_class_name' onFocus={this.toggleFocus} > 
+      <div>{this.renderSelectedMembers()}</div>
+      <input name='input' placeholder='Click To Add Some Tags....'
       onFocus={this.toggleFocus}/>
       </div>
     
-      <div>{this.renderSelectedMembers()}</div>
       </div>
       {this.state.isTagFocused && this.state.items.length ? <TagList onChildSelectMember = {this.onParantSelectMember} {...this.state}/> : null}
     </div>

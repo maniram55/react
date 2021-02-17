@@ -36,7 +36,7 @@ export default class TagList extends Component {
      <div className="cont-wrapper">
       <div className="all-member-list-cont" onClick={() => this.renderAllMembersIntoList()}>
         <span>Add All {this.props.items.length} Members</span> </div>
-           <div>{this.props.selectedItems.length != 12 ? this.renderMemberList() : null}</div>
+           <div>{this.renderMemberList()}</div>
           </div>
         );
    

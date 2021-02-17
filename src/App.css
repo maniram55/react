@@ -4,14 +4,14 @@
 .input-container{
     text-align: center;
 }
-
-.input-container .some_class_name{
-    width: 28%;
-    height: 30px;
-    left: 395px;
-    position: relative;
-    border: 1px solid;
-    overflow-y: auto;
+.some_class_name{
+        width: 35%;
+        min-height: 30px;
+        left: 360px;
+        position: relative;
+        border: 1px solid;
+        height: auto;
+        overflow-y: auto;
 }
 
 .curser-pointer{
@@ -35,9 +35,9 @@ textarea {
   }
 
 .cont-wrapper{
-    width: 306px;
+    width: 378px;
     position: relative;
-    left: 390px;
+    left: 359px;
     top: 10px;
     height: 200px;
     overflow-y: scroll;
@@ -83,6 +83,7 @@ input:focus{
 
 input{
     border: none;
+    padding: 5px;
 }
 
 .all-member-list-cont{
@@ -96,4 +97,22 @@ input{
 .all-member-list-cont:hover{
     background-color: rgb(97, 131, 245);
     color: white;
+}
+.memberlist-item {
+    display: inline-block;
+    padding: 5px;
+    background-color: aquamarine;
+}
+.item-content{
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.memberlist-con{
+    padding: 5px;
+    display: inline-block;
+}
+
+.display-inline{
+    display: inline-block;
 }
